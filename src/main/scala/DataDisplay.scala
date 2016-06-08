@@ -1,3 +1,5 @@
+package DataDisplay
+
 import io.continuum.bokeh.Tools.Pan
 import io.continuum.bokeh.{Circle, Color, ColumnDataSource, DataRange1d, Document, GlyphRenderer, Legend, LinearAxis, Location, Plot, Tools}
 
