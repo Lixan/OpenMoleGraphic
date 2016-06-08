@@ -1,5 +1,7 @@
 package DataCreation
 
+import java.io.IOException
+
 import scala.collection.JavaConverters._
 import scala.io.Source
 
@@ -101,6 +103,7 @@ object DataCreation {
   /**
     * A SUPPRIMER AVANT ENVOI
     * Vecteur de vecteur de test
+    *
     * @return
     */
   def getVectorOfVectorTest():Vector[Vector[Any]]={
@@ -123,14 +126,18 @@ object DataCreation {
     */
   def getVectorOfVectorFromCSV(nameFile:String): Vector[Vector[Any]] ={
     var myData = Vector[Vector[Any]]()
-    val source = Source.fromFile(nameFile).getLines()
+    try {
+      val source = Source.fromFile(nameFile).getLines()
 
-    val headerLine = source.take(1).next()
+      val headerLine = source.take(1).next()
 
-    for(line <- source){
-      val tuple = line.split(",")
-      println(tuple(0)+" "+tuple(1)+" "+tuple(2))
-      myData = myData :+ Vector(tuple(2).toDouble, tuple(1), tuple(0).toDouble)
+      for (line <- source) {
+        val tuple = line.split(",")
+        myData = myData :+ Vector(tuple(2).toDouble, tuple(1), tuple(0).toDouble)
+      }
+    }
+    catch {
+      case e: IOException => println("IO exception");
     }
 
     return myData
