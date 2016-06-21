@@ -8,17 +8,17 @@ import scala.io.Source
 
 /**
   * Created by clem on 09/04/16.
-  * Contient des fonctions permettant de générer des tableaux de données
-  * afin de tester les fonctions d'affichage
+  * Contains functions which generate data arrays
+  * in order to test display functions
   */
 object DataCreation {
 
   /**
-    * Génère un vecteur de nombres aléatoires
+    * Generate vector of random numbers
     *
-    * @param nbData : nombre de données générées
-    * @param limit : entier maximum généré
-    * @return : Vecteur de nombres aléatoires
+    * @param nbData : Number of data generated
+    * @param limit : Max number generated
+    * @return : Vector of random numbers
     */
   def getData1D(nbData:Int, limit:Int): Array[Double]= {
     val r = scala.util.Random
@@ -33,12 +33,12 @@ object DataCreation {
   }
 
   /**
-    * Génère une matrice de 2 lignes et nbData colonnes de forme exponentielle :
-    * - Ligne 0 = germes aléatoires générés
-    * - Ligne 1 = nombres aléatoires générés en fonction des germes
+    * Generate a matrix with 2 lines and nbData columns with exponential form :
+    * - Line 0 = random germ generated
+    * - Line 1 = random number generated based on the germ
     *
-    * @param nbData : nombre de données générées
-    * @return : matrice de nombres/germes aléatoires
+    * @param nbData : Number of data generated
+    * @return : Matrix with random numbers/germs
     */
   def getData2Dpow(nbData:Int): Array[Array[Double]]= {
     val germ = scala.util.Random
@@ -58,12 +58,12 @@ object DataCreation {
   }
 
   /**
-    * Génère une matrice de 2 lignes et nbData colonnes de firle linéaire :
-    * - Ligne 0 = germes aléatoires générés
-    * - Ligne 1 = nombres aléatoires générés en fonction des germes
+    * Generate a matrix with 2 lines and nbData columns with linear form :
+    * - Line 0 = random germ generated
+    * - Line 1 = random number generated based on the germ
     *
-    * @param nbData : nombre de données générées
-    * @return : matrice de nombres/germes aléatoires
+    * @param nbData : Number of data generated
+    * @return : Matrix with random numbers/germs
     */
   def getData2Dlinear(nbData:Int): Array[Array[Double]]= {
     val germ = scala.util.Random
@@ -83,10 +83,10 @@ object DataCreation {
   }
 
   /**
-    * Génère un vecteur de vecteur du type
-    * [ [germe1, algo1, res1.1], [germe2, algo1, res1.2], ... [germeN, algoN, resN.N] ]
+    * Generate a vector of vector with the following form:
+    * [ [germ1, algo1, res1.1], [germ2, algo1, res1.2], ... [germN, algoN, resN.N] ]
     *
-    * @return : vecteur de vecteur généré
+    * @return : Vector of vector generated
     */
   def getVectorOfVector():Vector[Vector[Any]]={
     val r = scala.util.Random
@@ -101,28 +101,11 @@ object DataCreation {
   }
 
   /**
-    * A SUPPRIMER AVANT ENVOI
-    * Vecteur de vecteur de test
+    * Generate a vector of vector with the following form:
+    * [ [germ1, algo1, res1.1], [germ2, algo1, res1.2], ... [germN, algoN, resN.N] ]
     *
-    * @return
-    */
-  def getVectorOfVectorTest():Vector[Vector[Any]]={
-    var myData = Vector[Vector[Any]]()
-    myData = myData :+ Vector(1.0, "FIRST", 2.0)
-    myData = myData :+ Vector(2.0, "FIRST", 3.0)
-    myData = myData :+ Vector(3.0, "FIRST", 4.0)
-    myData = myData :+ Vector(4.0, "SEC", 5.0)
-    myData = myData :+ Vector(5.0, "SEC", 6.0)
-    myData = myData :+ Vector(6.0, "SEC", 7.0)
-    return myData
-  }
-
-  /**
-    * Génère un vecteur de vecteur du type
-    * [ [germe1, algo1, res1.1], [germe2, algo1, res1.2], ... [germeN, algoN, resN.N] ]
-    *
-    * @param nameFile nom du chemin du fichier CSV
-    * @return vecteur de vecteur généré
+    * @param nameFile Path of the csv file
+    * @return Vector of vector generated
     */
   def getVectorOfVectorFromCSV(nameFile:String): Vector[Vector[Any]] ={
     var myData = Vector[Vector[Any]]()
@@ -144,21 +127,21 @@ object DataCreation {
   }
 
   /**
-    * Ajoute une matrice 2D à un vecteur de vecteur
+    * Add a 2D matrix to a vector of vector
     *
-    * @param nomAlgo : nom de l'algo qui a été utilisé pour générer les nombres aléatoires
-    * @param nbData : nombre de données générées
-    * @param myData : vecteur de vecteur de type [ [germe1, algo1, res1.1], [germe2, algo1, res1.2], ... [germeN, algoN, resN.N] ]
-    * @param callback : fonction générant nbData de données aléatoires
-    * @return : le vecteur de vecteur comprenant en plus les nouvelles valeurs aléatoires ajoutées
+    * @param nomAlgo : Name of the algorithm used to generate random numbers
+    * @param nbData : Number of data generated
+    * @param myData : Vector of vector[ [germ1, algo1, res1.1], [germ2, algo1, res1.2], ... [germN, algoN, resN.N] ]
+    * @param callback : Function which generate nbData of random data
+    * @return : The vecteur of vector with the new random data added
     */
   def add2DMatrix(nomAlgo:String, nbData:Int, myData:Vector[Vector[Any]], callback: (Int) => Array[Array[Double]]): Vector[Vector[Any]]={
     var i = 0
-    val values = callback(nbData) //Récupération des valeurs
+    val values = callback(nbData) //Get data
     var matrixData = myData
 
     for(i <- 0 to nbData-1){
-      matrixData = matrixData :+ Vector(values(0)(i), nomAlgo, values(1)(i)) // ajout d'un vecteur [germe i, nomAlgo, valeur i]
+      matrixData = matrixData :+ Vector(values(0)(i), nomAlgo, values(1)(i)) // Add a vector like [germ i, algoName, data i]
     }
 
     return matrixData
