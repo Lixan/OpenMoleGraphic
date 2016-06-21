@@ -1,20 +1,26 @@
-package DataClean
-/**
-  * Created by alexandre on 08/06/16.
-  */
-object DataClean {
+package Main
 
-  /**
-    * Vérifie que la donnée passée en paramètre est bien un fichier CSV
-    *
-    * @param filename : nom de fichier csv
-    */
-  def filenIsCSV(filename:String): Boolean={
-    var ok = false
-    if(filename.endsWith(".csv")) {
-      ok = true
+import DataCreation.DataCreation
+import DataDisplay.DataDisplay
+import DataClean.DataClean
+
+import io.continuum.bokeh._
+
+import scala.collection.mutable.ListBuffer
+
+object Main extends App {
+  if(args.length > 0) {
+    if(DataClean.filenIsCSV(args(0))) {
+      val data = DataCreation.getVectorOfVectorFromCSV(args(0))
+      DataDisplay.displayVectorOfVector(data)
     }
-    return ok
-  }
+    else {
+      println("Un fichier de type CSV est requis.")
+    }
 
+  }
+  else {
+    println("run filename")
+  }
 }
+
