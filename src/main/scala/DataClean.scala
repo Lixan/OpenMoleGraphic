@@ -1,6 +1,7 @@
 package DataClean
 /**
   * Created by alexandre on 08/06/16.
+  * clean data entries
   */
 object DataClean {
 

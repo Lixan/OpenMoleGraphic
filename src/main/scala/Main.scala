@@ -2,8 +2,10 @@ package Main
 
 import DataCreation.DataCreation
 import DataDisplay.DataDisplay
+import HistogramDisplay.HistogramDisplay
+import GraphDisplay.GraphDisplay
+import CloudOfDotsDisplay.CloudOfDotsDisplay
 import DataClean.DataClean
-
 import io.continuum.bokeh._
 
 import scala.collection.mutable.ListBuffer
@@ -12,10 +14,16 @@ object Main extends App {
   if(args.length > 0) {
     if(DataClean.filenIsCSV(args(0))) {
       val data = DataCreation.getVectorOfVectorFromCSV(args(0))
-      DataDisplay.displayVectorOfVector(data)
+
+      val dataH = new HistogramDisplay()
+      val dataC = new CloudOfDotsDisplay()
+      val dataG = new GraphDisplay()
+
+      /*dataH.displayVectorOfVector(data)*/
+      dataC.displayVectorOfVector(data)
     }
     else {
-      println("Un fichier de type CSV est requis.")
+      println("A CSV file is required.")
     }
 
   }

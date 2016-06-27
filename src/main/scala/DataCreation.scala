@@ -116,7 +116,7 @@ object DataCreation {
 
       for (line <- source) {
         val tuple = line.split(",")
-        myData = myData :+ Vector(tuple(2).toDouble, tuple(1), tuple(0).toDouble)
+        myData = myData :+ Vector(tuple(0).toDouble, tuple(1), tuple(2).toDouble)
       }
     }
     catch {
