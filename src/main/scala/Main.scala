@@ -33,7 +33,7 @@ object Main extends App {
 
   }
   else {
-    println("> run [file.CSV] [display]\nWrite one of the following words for display :\nhisto, cloud ")
+    println("> run [file.CSV] [display]\nWrite one of the following words for the display :\nhisto, cloud ")
   }
 }
 
